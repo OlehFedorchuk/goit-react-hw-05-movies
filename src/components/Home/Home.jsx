@@ -38,7 +38,6 @@ function Home (){
                    <NavLink to={`/movies/${article.id}`} >
                     {article.title ? article.title : article.name}
                    </NavLink>
-                
                    </li>
                   
                 ))}
