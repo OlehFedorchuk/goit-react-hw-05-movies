@@ -34,15 +34,22 @@ const MoviesDetails = () => {
 
   return (
     <div>
-      <button>&#8592; <NavLink to='/'>Go back</NavLink></button>
-      <img src={`https://image.tmdb.org/t/p/w200/${movieData.backdrop_path}`} alt={movieData.title}
+      <button>&#8592; <NavLink to='/' className='ButtonGoBack'>Go back</NavLink></button>
+      <div className='Movie'> <img src={`https://image.tmdb.org/t/p/w200/${movieData.backdrop_path}`} alt={movieData.title}
       width='200'
       height='300'/>
+      <div>
       <h2>{movieData.title}</h2>
-      <p>User Score: {movieData.vote_average * 10}%</p>
-      <p><b>Owerview</b> {movieData.overview}</p>
-      <p><b>Genres</b> {movieData.genres.map(genre => genre.name).join(', ')}</p>
-      <ul className='listCastAndReview'> Additional information
+      <p>User Score:  {Math.round(movieData.vote_average * 10)}%</p>
+      <b>Overview</b>
+      <p> {movieData.overview}</p>
+      <b>Genres</b>
+      <p> {movieData.genres.map(genre => genre.name).join(', ')}</p>
+    </div>
+      </div>
+
+      <ul className='listCastAndReview'> 
+        <li className='titleForCastAndReview'>Additional information</li>
         <li><Link to='cast'>Cast</Link></li>
         <li><Link to='reviews'>Review</Link></li>
       </ul>

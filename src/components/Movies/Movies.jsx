@@ -28,11 +28,9 @@ const Movies = () => {
   };
 
   return (
-    <div>
-      <h2>Search Movies</h2>
+    <div className='Search'>
       <input
         type="text"
-        placeholder="Search for a movie..."
         value={searchQuery}
         onChange={e => setSearchQuery(e.target.value)}
       />

@@ -18,7 +18,6 @@ function Home (){
         axios
         .request(options)
         .then(function (response) {
-          console.log(response.data);
           setArticles(response.data.results);
         })
         .catch(function (error) {

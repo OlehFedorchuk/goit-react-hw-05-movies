@@ -1,13 +1,38 @@
 .active{
-    color:red;
+    color:rgb(191, 16, 16);
 }
 nav{
     padding: 20px;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    box-shadow: rgba(149, 157, 165, 0.7)  1px 1px 10px;
+    margin-bottom: 10px;
     
+}
+nav a{
+   text-decoration: none;
+   padding-left: 20px;
+   color: #000;
+   font-weight: 600;
+}
+nav a:hover{
+    text-decoration:underline;
 }
 .listCastAndReview{
     border: 1px solid grey;
     padding-top: 20px;
     padding-bottom: 20px;
+}
+.titleForCastAndReview{
+    list-style-type: none;
+    padding-left: 1px;
+}
+.Search{
+    padding-top: 20px;
+}
+.Movie{
+ display: flex;
+ gap: 20px
+
+}
+.ButtonGoBack{
+    text-decoration: none;
 }
