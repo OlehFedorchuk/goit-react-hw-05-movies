@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { NavLink, Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 
 
 const MoviesDetails = () => {
+  const navigate = useNavigate();
   const { movieId } = useParams();
   const [movieData, setMovieData] = useState(null);
 
@@ -34,7 +35,8 @@ const MoviesDetails = () => {
 
   return (
     <div>
-      <button>&#8592; <NavLink to='/' className='ButtonGoBack'>Go back</NavLink></button>
+      <button onClick={() => navigate(-1)}>&#8592;   Go back</button>
+      {/* //className='ButtonGoBack' */}
       <div className='Movie'> <img src={`https://image.tmdb.org/t/p/w200/${movieData.backdrop_path}`} alt={movieData.title}
       width='200'
       height='300'/>

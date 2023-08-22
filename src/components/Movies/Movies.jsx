@@ -1,20 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 
 const Movies = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  const handleSearch = async () => {
-    if (searchQuery.trim() === '') {
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const queryParamSearch = queryParams.get('search');
+
+    if (queryParamSearch) {
+      setSearchQuery(queryParamSearch);
+      handleSearch(queryParamSearch);
+    }
+  }, [location.search]);
+
+  const handleSearch = async (query) => {
+    if (query.trim() === '') {
       return;
     }
 
     try {
       const response = await axios.get('https://api.themoviedb.org/3/search/movie', {
         params: {
-          query: searchQuery,
+          query: query,
           language: 'en-US',
           page: 1,
           include_adult: false,
@@ -27,18 +40,25 @@ const Movies = () => {
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate(`/movies?search=${searchQuery}`);
+  };
+
   return (
     <div className='Search'>
-      <input
-        type="text"
-        value={searchQuery}
-        onChange={e => setSearchQuery(e.target.value)}
-      />
-      <button onClick={handleSearch}>Search</button>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <button type="submit">Search</button>
+      </form>
       <ul>
         {searchResults.map(movie => (
           <li key={movie.id}>
-            <Link to={`/movies/${movie.id}`}>
+            <Link to={`/movies/${movie.id}?search=${searchQuery}`}>
               {movie.title} ({movie.release_date ? movie.release_date.substring(0, 4) : 'N/A'})
             </Link>
           </li>
